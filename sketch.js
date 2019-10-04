@@ -1,5 +1,5 @@
 let paused = false;
-var inc = 0.005;
+var inc = 0.05;
 var scl = 10;
 var cols, rows;
 var zoff = 0;
@@ -42,10 +42,13 @@ function draw() {
       for (let x = 0; x < cols; x++) {
         var index = x + y * cols;
         var angle = noise(xoff, yoff, zoff) * TWO_PI;
+        var boop = noise(xoff, yoff, zoff) * 255;
         var v = p5.Vector.fromAngle(angle);
         v.setMag(5);
         flowfield[index] = v;
         xoff += inc;
+
+        background(boop, 0, boop, boop)
       }
       yoff += inc;
     }
