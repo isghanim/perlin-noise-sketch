@@ -30,10 +30,6 @@ function mousePressed() {
   paused = !paused;
 }
 
-function keyPressed() {
-  initParticles(color(0, 0, 255, 5));
-}
-
 function draw() {
   if (!paused) {
     let yoff = 0;
@@ -42,13 +38,10 @@ function draw() {
       for (let x = 0; x < cols; x++) {
         var index = x + y * cols;
         var angle = noise(xoff, yoff, zoff) * TWO_PI;
-        var boop = noise(xoff, yoff, zoff) * 255;
         var v = p5.Vector.fromAngle(angle);
         v.setMag(5);
         flowfield[index] = v;
         xoff += inc;
-
-        background(boop, 0, boop, boop)
       }
       yoff += inc;
     }

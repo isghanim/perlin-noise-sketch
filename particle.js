@@ -5,8 +5,6 @@ function Particle(initialX = 0, initialY = 0, color) {
     this.maxspeed = 1;
     this.color = color;
 
-    this.prevPos = this.pos.copy();
-
     this.update = function() {
         this.vel.add(this.acc);
         this.vel.limit(this.maxspeed);
