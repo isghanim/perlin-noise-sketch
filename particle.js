@@ -1,3 +1,6 @@
+let diameter = 250;
+let radius = diameter / 2;
+
 function Particle(initialX = 0, initialY = 0, color) {
     this.pos = createVector(initialX, initialY);
     this.vel = createVector(0, 0);
@@ -27,20 +30,20 @@ function Particle(initialX = 0, initialY = 0, color) {
     this.show = function() {
         stroke(0, 160);
         fill(this.color);
-        circle(this.pos.x, this.pos.y, 250);
+        circle(this.pos.x, this.pos.y, diameter);
     }
  
     this.edges = function() {
-        if (this.pos.x > width) {
+        if (this.pos.x > width + radius) {
             this.pos.x = 0;
         }
-        if (this.pos.x < 0) {
-            this.pos.x = width;
+        if (this.pos.x < 0 - radius) {
+            this.pos.x = width + radius;
         }
-        if (this.pos.y > width) {
+        if (this.pos.y > width + radius) {
             this.pos.y = 0;
         }
-        if (this.pos.y < 0) {
+        if (this.pos.y < 0 - radius) {
             this.pos.y = width;
         }
     }
