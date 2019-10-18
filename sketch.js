@@ -17,6 +17,8 @@ function setup() {
   flowfield = new Array(cols * rows);
 
   initParticles();
+
+  setInterval(myClear, 120000);
 }
 
 function initParticles() {
@@ -52,6 +54,10 @@ function mousePressed() {
 }
 
 function keyPressed() {
+  myClear();
+}
+
+function myClear() {
   clear();
   setBackground();
   particles = [];
