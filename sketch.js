@@ -1,8 +1,8 @@
 let paused = false;
-var inc = 0.05;
-var scl = 10;
+var inc = 0.01;
+var scl = 5;
 var cols, rows;
-var zoff = 0;
+var zoff = 0.001;
 
 var particles = [];
 
@@ -12,22 +12,50 @@ function setup() {
   createCanvas(displayWidth, displayHeight);
   cols = floor(width / scl);
   rows = floor(height / scl);
-  background(0);
+  setBackground();
 
   flowfield = new Array(cols * rows);
 
-  var c = color(0, 0, 255, 5);
-  initParticles(c);
+  initParticles();
 }
 
-function initParticles(c) {
+function initParticles() {
   for (let i = 0; i < 20; i++) {
-    particles[i] = new Particle(random(width), random(height), c);
+    // color(100, 0, 255, 5)
+    particles[i] = new Particle(
+      random(width),
+      random(height),
+      random(10, 250),
+      color(random(80, 140), 0, random(100, 200), 5),
+      color(random(50, 100), 0, 70, 160)
+    );
   }
+}
+
+// color(random(80, 140), 0, random(100, 200), 5),
+// color(random(50, 100), 0, 70, 160)
+
+// color(random(80, 140), 0, random(80, 140), 5),
+// color(random(50, 100), 0, 70, 160)
+
+// color(random(80, 120), 0, random(100, 200), 5),
+// color(random(50, 80), 0, random(80, 150), 160)
+
+function setBackground() {
+  background(100, 0, 70);
+  // background(70, 0, 130);
+  // background(0);
 }
 
 function mousePressed() {
   paused = !paused;
+}
+
+function keyPressed() {
+  clear();
+  setBackground();
+  particles = [];
+  initParticles();
 }
 
 function draw() {
@@ -39,7 +67,7 @@ function draw() {
         var index = x + y * cols;
         var angle = noise(xoff, yoff, zoff) * TWO_PI;
         var v = p5.Vector.fromAngle(angle);
-        v.setMag(5);
+        v.setMag(0.001);
         flowfield[index] = v;
         xoff += inc;
       }
